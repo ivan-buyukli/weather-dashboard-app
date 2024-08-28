@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.search-field-container {
+  width: 35vw;
+  height: 5vh;
+  position: relative;
+}
+
+.search-field-container input {
+  width: 100%;
+  padding: 12px 45px 12px 12px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.search-field-container input::placeholder {
+  color: #000;
+  font-size: 17px;
+  opacity: 1;
+}
+
+.search-field-container i {
+  position: absolute;
+  right: 20px;
+  top: 57%;
+  transform: translateY(-50%);
+  color: #000;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  height: 20vh;
+  flex-direction: row;
+}
