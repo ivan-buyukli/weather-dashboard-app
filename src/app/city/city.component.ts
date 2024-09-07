@@ -20,17 +20,22 @@ export class CityComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cityControl.valueChanges
       .pipe(
-        debounceTime(500),
+        debounceTime(1000),
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
       .subscribe((cityName) => {
         this.cities = this.cityService.findCityGeoLocations(cityName);
+        console.log(this.cities)
       })
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  searchWeather(cityName: string) {
+    console.log(cityName)
   }
 }

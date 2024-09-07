@@ -5,7 +5,7 @@
       @if (cities.length > 0) {
         <ul>
           @for (city of cities; track city.lat) {
-            <li>{{ city.displayPlace }}</li>
+            <li (click)="searchWeather(city.displayPlace)">{{ city.displayName }}</li>
           }
         </ul>
       }
