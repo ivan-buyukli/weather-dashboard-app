@@ -2,5 +2,12 @@
   <div class="search-field-container">
       <input type="text" placeholder="Search for a city..." [formControl]="cityControl">
       <i class="fa fa-magnifying-glass"></i>
+      @if (cities.length > 0) {
+        <ul>
+          @for (city of cities; track city.lat) {
+            <li>{{ city.displayPlace }}</li>
+          }
+        </ul>
+      }
   </div>
 </div>

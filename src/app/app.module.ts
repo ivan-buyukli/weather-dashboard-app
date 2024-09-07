@@ -21,7 +21,8 @@ import {WeatherService} from "./services/weather.service";
     NgOptimizedImage,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [CityService, WeatherService],
   bootstrap: [AppComponent]

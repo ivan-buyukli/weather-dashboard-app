@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, Subject, takeUntil} from "rxjs";
 import {CityService} from "../services/city.service";
+import {City} from "../common/model";
 
 @Component({
   selector: 'app-city',
@@ -10,6 +11,7 @@ import {CityService} from "../services/city.service";
 })
 export class CityComponent implements OnInit, OnDestroy {
   cityControl = new FormControl('');
+  cities: City[] = [];
   destroy$ = new Subject<void>();
 
   constructor(private cityService: CityService) {
@@ -23,8 +25,7 @@ export class CityComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((cityName) => {
-        console.log(cityName);
-        this.cityService.findCityGeoLocations(cityName);
+        this.cities = this.cityService.findCityGeoLocations(cityName);
       })
   }
 

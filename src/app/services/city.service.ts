@@ -1,12 +1,39 @@
 import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {CITY_API_KEY_TOKEN, CITY_AUTOCOMPLETE_URL, CITY_QUERY_PARAMS} from "../common/constants";
+import {Observable} from "rxjs";
+import {Address, City} from "../common/model";
+import {plainToClass, plainToInstance} from "class-transformer";
 
 @Injectable(
   {
     providedIn: "root"
   })
 export class CityService {
-  //TODO implement the method
-  findCityGeoLocations(cityName: string | null) {
 
+  constructor(private httpClient: HttpClient) {
+  }
+
+  findCityGeoLocations(cityName: string | null): City[] {
+    const response: Observable<any> = this.httpClient.get(this.buildAutocompleteUrl(CITY_AUTOCOMPLETE_URL, CITY_API_KEY_TOKEN, CITY_QUERY_PARAMS, cityName));
+    return this.mapResponseToCityArray(response);
+  }
+
+  private buildAutocompleteUrl(baseUrl: string, accessToken: string, query: string, cityName: string | null): string {
+    const city = cityName ? cityName : '';
+    const queryParams = query.replace('{city}', city);
+    return `${baseUrl}${accessToken}${queryParams}`;
+  }
+
+  private mapResponseToCityArray(response: Observable<any>): City[] {
+    let cityArray: City[] = [];
+    response.subscribe((cities) => {
+      cities.forEach((data: Object) => {
+        const city = plainToInstance(City, data);
+        cityArray.push(city);
+      })
+    });
+    console.log(cityArray);
+    return cityArray;
   }
 }
