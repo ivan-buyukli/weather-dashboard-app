@@ -1,11 +1,17 @@
 <div class="container">
   <div class="search-field-container">
-      <input type="text" placeholder="Search for a city..." [formControl]="cityControl">
+      <input
+              type="text"
+              placeholder="Search for a city..."
+              [formControl]="cityControl"
+              (focus)="onFocus()"
+              (blur)="onBlur()"
+      >
       <i class="fa fa-magnifying-glass"></i>
-      @if (cities.length > 0) {
+      @if (showSuggestions && cities.length > 0) {
         <ul>
           @for (city of cities; track city.lat) {
-            <li (click)="searchWeather(city.displayPlace)">{{ city.displayName }}</li>
+            <li (click)="searchWeather(city)">{{ city.displayName }}</li>
           }
         </ul>
       }

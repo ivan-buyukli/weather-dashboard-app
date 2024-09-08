@@ -134,3 +134,38 @@ export class Address {
     this._countryCode = countryCode;
   }
 }
+
+export interface WeatherParams {
+  latitude: number[];
+  longitude: number[];
+  current: string;
+  hourly: string;
+  daily: string;
+}
+
+export interface WeatherData  {
+  current: Current;
+  hourly: Hourly;
+  daily: Daily;
+}
+
+export interface Current {
+  time: Date;
+  temperature: number;
+  weatherCode: number;
+  windSpeed: number;
+  windDirection: number;
+}
+
+export interface Hourly {
+  time: Date[];
+  temperature: Float32Array;
+  precipitation: Float32Array;
+}
+
+export interface Daily {
+  time: Date[];
+  weatherCode: Float32Array;
+  temperatureMax: Float32Array;
+  temperatureMin: Float32Array;
+}
